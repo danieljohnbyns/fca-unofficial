@@ -29,14 +29,14 @@ module.exports = function (defaultFuncs, api, ctx) {
     }
 
     const form = {
-      av: ctx.userID,
+      av: ctx.globalOptions.pageID || ctx.userID,
       fb_api_caller_class: "RelayModern",
       fb_api_req_friendly_name: "useGenerateAIThemeMutation",
       doc_id: "23873748445608673",
       variables: JSON.stringify({
         input: {
           client_mutation_id: Math.round(Math.random() * 19).toString(),
-          actor_id: ctx.userID,
+          actor_id: ctx.globalOptions.pageID || ctx.userID,
           bypass_cache: true,
           caller: "MESSENGER",
           num_themes: 1,

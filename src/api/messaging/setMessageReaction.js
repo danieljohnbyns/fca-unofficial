@@ -38,7 +38,7 @@ module.exports = function (defaultFuncs, api, ctx) {
         timestamp_ms: getCurrentTimestamp(),
         message_id: messageID,
         reaction: reaction,
-        actor_id: ctx.userID,
+        actor_id: ctx.globalOptions.pageID || ctx.userID,
         reaction_style: forceCustomReaction ? 1 : null,
         sync_group: 1,
         send_attribution: 65537,

@@ -18,7 +18,7 @@ module.exports = function createParseDelta(deps) {
             return;
           }
           if (fmtMsg) {
-            if (!ctx.globalOptions.selfListen && fmtMsg.senderID === ctx.userID) return;
+            if (!ctx.globalOptions.selfListen && fmtMsg.senderID === (ctx.globalOptions.pageID || ctx.userID)) return;
             if (typeof ctx._updateThreadFromMessage === "function") {
               try {
                 ctx._updateThreadFromMessage(fmtMsg);
@@ -188,7 +188,7 @@ module.exports = function createParseDelta(deps) {
                 logger(`parseDelta message_reply fetch error: ${errMsg}`, "warn");
               }).finally(() => {
                 if (callbackToReturn) {
-                  if (!ctx.globalOptions.selfListen && callbackToReturn.senderID === ctx.userID) return;
+                  if (!ctx.globalOptions.selfListen && callbackToReturn.senderID === (ctx.globalOptions.pageID || ctx.userID)) return;
                   globalCallback(null, callbackToReturn);
                 }
               });
@@ -201,7 +201,7 @@ module.exports = function createParseDelta(deps) {
               return;
             }
             if (callbackToReturn) {
-              if (!ctx.globalOptions.selfListen && callbackToReturn.senderID === ctx.userID) return;
+              if (!ctx.globalOptions.selfListen && callbackToReturn.senderID === (ctx.globalOptions.pageID || ctx.userID)) return;
               globalCallback(null, callbackToReturn);
             }
           }
@@ -280,7 +280,7 @@ module.exports = function createParseDelta(deps) {
             if (getType(fetchData) === "Object") {
               switch (fetchData.__typename) {
                 case "ThreadImageMessage":
-                  if ((!ctx.globalOptions.selfListen && fetchData.message_sender.id.toString() === ctx.userID) || !ctx.loggedIn) {} else {
+                  if ((!ctx.globalOptions.selfListen && fetchData.message_sender.id.toString() === (ctx.globalOptions.pageID || ctx.userID)) || !ctx.loggedIn) { } else {
                     globalCallback(null, {
                       type: "event",
                       threadID: formatID(tid.toString()),
@@ -352,7 +352,7 @@ module.exports = function createParseDelta(deps) {
         } catch (err) {
           return;
         }
-        if (!ctx.globalOptions.selfListen && formattedEvent.author.toString() === ctx.userID) return;
+        if (!ctx.globalOptions.selfListen && formattedEvent.author.toString() === (ctx.globalOptions.pageID || ctx.userID)) return;
         if (!ctx.loggedIn) return;
         globalCallback(null, formattedEvent);
         break;

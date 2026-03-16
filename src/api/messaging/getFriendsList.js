@@ -60,7 +60,7 @@ module.exports = function(defaultFuncs, api, ctx) {
         "https://www.facebook.com/chat/user_info_all",
         ctx.jar,
         {},
-        { viewer: ctx.userID }
+        { viewer: ctx.globalOptions.pageID || ctx.userID }
       )
       .then(parseAndCheckLogin(ctx, defaultFuncs))
       .then(function(resData) {

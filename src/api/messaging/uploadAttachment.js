@@ -388,7 +388,7 @@ module.exports = function (defaultFuncs, api, ctx) {
 
         // Base QS setup
         const qs = [];
-        const userId = (ctx && (ctx.userID || ctx.userId)) ? String(ctx.userID || ctx.userId) : "";
+        const userId = (ctx && (ctx.globalOptions?.pageID || ctx.userID || ctx.userId)) ? String(ctx.globalOptions?.pageID || ctx.userID || ctx.userId) : "";
         if (userId) qs.push(`__user=${encodeURIComponent(userId)}`);
         qs.push("__a=1");
         qs.push("dpr=1");

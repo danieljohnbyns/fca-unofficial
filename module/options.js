@@ -20,6 +20,10 @@ function setOptions(globalOptions, options) {
       continue;
     }
     switch (key) {
+      case "pageID": {
+        globalOptions.pageID = options.pageID ? String(options.pageID) : null;
+        break;
+      }
       case "userAgent": {
         globalOptions.userAgent = options.userAgent || "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36";
         break;

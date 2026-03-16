@@ -207,7 +207,7 @@ module.exports = function(defaultFuncs, api, ctx) {
       };
     }
     const form = {
-      av: ctx.userID,
+      av: ctx.globalOptions.pageID || ctx.userID,
       queries: JSON.stringify({
         o0: {
           doc_id: "3336396659757871",

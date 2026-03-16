@@ -45,6 +45,9 @@ module.exports = function createListenMqtt(deps) {
       ct: "websocket", aid: 219994525426954, aids: null, mqtt_sid: "",
       cp: 3, ecp: 10, st: [], pm: [], dc: "", no_auto_fg: true, gas: null, pack: [], p: null, php_override: ""
     };
+    if (ctx.globalOptions.pageID) {
+      username.av = ctx.globalOptions.pageID;
+    }
 
     const cookies = api.getCookies();
     let host;
@@ -141,7 +144,7 @@ module.exports = function createListenMqtt(deps) {
 
       const queue = {
         sync_api_version: 11, max_deltas_able_to_process: 100, delta_batch_size: 500,
-        encoding: "JSON", entity_fbid: ctx.userID, initial_titan_sequence_id: ctx.lastSeqId, device_params: null
+        encoding: "JSON", entity_fbid: ctx.globalOptions.pageID || ctx.userID, initial_titan_sequence_id: ctx.lastSeqId, device_params: null
       };
       const topic = ctx.syncToken ? "/messenger_sync_get_diffs" : "/messenger_sync_create_queue";
       if (ctx.syncToken) { queue.last_seq_id = ctx.lastSeqId; queue.sync_token = ctx.syncToken; }

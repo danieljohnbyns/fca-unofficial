@@ -26,7 +26,7 @@ module.exports = function(defaultFuncs, api, ctx) {
       floc: "friends_tab",
       "nctr[_mod]":
         "pagelet_timeline_app_collection_" +
-        ctx.userID +
+        (ctx.globalOptions.pageID || ctx.userID) +
         ":2356318349:2"
     };
 

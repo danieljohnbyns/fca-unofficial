@@ -40,7 +40,7 @@ module.exports = function (defaultFuncs, api, ctx) {
       variables: JSON.stringify({
         id
       }),
-      av: ctx.userID
+      av: ctx.globalOptions.pageID || ctx.userID
     };
     defaultFuncs
       .post("https://www.facebook.com/api/graphql/", ctx.jar, form)
