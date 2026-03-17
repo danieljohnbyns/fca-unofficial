@@ -169,6 +169,9 @@ declare module '@dongdev/fca-unofficial' {
     getFriendsList: (callback?: (err: Error | null, friends: IFCAU_Friend[]) => void) => Promise<IFCAU_Friend[]>;
     getCurrentUserID: () => string;
 
+    // Profile info
+    getProfiles: (callback?: (err: Error | null, profiles: IFCAU_ProfilesResponse) => void) => Promise<IFCAU_ProfilesResponse>;
+
     // Utilities
     getAppState: () => any;
     getEmojiUrl: (c: string, size: number, pixelRatio: number) => string;
@@ -567,6 +570,24 @@ declare module '@dongdev/fca-unofficial' {
     isBirthday: boolean;
     searchToken: any;
     alternateName?: string;
+  };
+
+  export type IFCAU_Profile = {
+    id: string | null;
+    name: string | null;
+    profileUrl: string | null;
+    entityUrl: string | null;
+    pictureUrl: string | null;
+    delegatePageId: string | null;
+    unseenMessageCount: number | null;
+    viewerHasAdvertisingPermission: boolean | null;
+  };
+
+  export type IFCAU_ProfilesResponse = {
+    actor: IFCAU_Profile | null;
+    delegatePageId: string | null;
+    additionalProfiles: IFCAU_Profile[];
+    eligibleProfiles: IFCAU_Profile[];
   };
 
   export type IFCAU_UserIDResponse = {
